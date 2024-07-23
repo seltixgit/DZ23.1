@@ -1,0 +1,33 @@
+{% extends 'catalog/home.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="col-3">
+    <div class="mb-4 text-center">
+        <div class="card-header">
+            <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:create' %}" role="button">Создать блог</a>
+        </div>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 text-center">
+    {% for blog in object_list %}
+    <div class="col-3">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Блог: {{ blog.title }}</h4>
+            </div>
+            <div class="card-body">
+                <div class="col-12">
+                    <img src="{{ blog.photo | media_filter }}">
+                </div>
+                <h6 class="card-title pricing-card-title">Содержимое: {{ blog.content|slice:25 }}...</h6>
+                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:view' blog.pk %}" role="button">Подробно</a>
+                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:edit' blog.pk %}" role="button">Изменить</a>
+                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:delete' blog.pk %}" role="button">Удалить</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'catalog/home.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 text-center">
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Блог: "{{ object.title }}" ({{ object.slug }})</h4>
+                </div>
+                <div class="col-12">
+                    <img src="{{ object.photo | media_filter }}">
+                </div>
+
+                <div class="card-body">
+                    <p>
+                        Дата создания: {{ object.created_at }}
+                    </p>
+                    <p>
+                        {{ object.content }}
+                    </p>
+                    <a class="btn btn-primary" href="{% url 'blog:list' %}" role="button">Вернуться к списку постов</a>
+                </div>
+                <div class="card-footer">
+                    Просмотры: {{ object.views }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
