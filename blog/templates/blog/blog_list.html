@@ -1,0 +1,35 @@
+{% extends 'catalog/home.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="col-3">
+    <div class="mb-4 text-center">
+        <div class="card-header">
+            <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:create' %}" role="button">Создать блог</a>
+        </div>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 text-center">
+    {% for object in object_list %}
+    <div class="col-3">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ object.title }}</h4>
+            </div>
+            <div class="card-body">
+                <img src="{{ product.image | media_filter }}">
+                <h2 class="card-title pricing-card-title">-</h2>
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li>-</li>
+                    <li>{{ object.content|slice:20 }}...</li>
+                </ul>
+                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:view' object.pk %}" role="button">Подробно</a>
+                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:edit' object.pk %}" role="button">Изменить</a>
+                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:delete' object.pk %}" role="button">Удалить</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
