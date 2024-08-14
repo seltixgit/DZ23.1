@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import User
+
 
 class Category(models.Model):
     objects = None
@@ -26,6 +28,8 @@ class Product(models.Model):
     price = models.PositiveIntegerField(verbose_name='Цена за покупку')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата последнего изменения')
+    author = models.ForeignKey(User, verbose_name="Автор", blank=True, null=True, on_delete=models.SET_NULL,
+                               related_name='users')
 
     class Meta:
         verbose_name = 'Продукт'
