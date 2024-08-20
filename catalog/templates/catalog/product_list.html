@@ -23,9 +23,11 @@
                         {% endfor %}
                         </li>
                     </ul>
+                    {% if perms.catalog.can_edit_product_description and perms.catalog.can_edit_product_category and perms.catalog.can_cancel_publication or user == product.author %}
+                    <a class="btn btn-primary" href="{% url 'catalog:product_update' product.pk %}" role="button">Изменить</a>
+                    {% endif %}
                     <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}" role="button">Подробно</a>
                     {% if user.is_authenticated %}
-                    <a class="btn btn-primary" href="{% url 'catalog:product_update' product.pk %}" role="button">Изменить</a>
                     <a class="btn btn-primary" href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить</a>
                     {% endif %}
                     <div class="mt-3 mb-3">

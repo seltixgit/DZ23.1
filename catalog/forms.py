@@ -17,6 +17,13 @@ class ProductForm(StyleFormMixin, ModelForm):
         model = Product
         exclude = ('created_at', 'updated_at', 'author')
 
+
+class ProductModeratorForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Product
+        fields = ('description', 'category', 'is_published')
+
+
     def clean_name(self):
         cleaned_data = self.cleaned_data['name']
         forbidden_words = ('казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция',
